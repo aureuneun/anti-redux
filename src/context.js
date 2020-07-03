@@ -1,34 +1,30 @@
 import React, { useState, useContext } from "react";
 
-const UserContext = React.createContext();
+const LangContext = React.createContext();
 
-const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "nico",
-    loggedIn: false,
-  });
-  const userLoggedIn = () => setUser({ ...user, loggedIn: true });
-  const userLoggedOut = () => setUser({ ...user, loggedIn: false });
+const ContextProvider = ({ defaultLang, children, translations }) => {
+  const [lang, setLang] = useState(defaultLang);
+  const translate = (text) => translations[lang][text];
   return (
-    <UserContext.Provider value={{ user, userLoggedIn, userLoggedOut }}>
+    <LangContext.Provider value={{ lang, setLang, translate }}>
       {children}
-    </UserContext.Provider>
+    </LangContext.Provider>
   );
 };
 
-export const useUser = () => {
-  const { user } = useContext(UserContext);
-  return user;
+export const useLang = () => {
+  const { lang } = useContext(LangContext);
+  return lang;
 };
 
-export const useUserLoggedIn = () => {
-  const { userLoggedIn } = useContext(UserContext);
-  return userLoggedIn;
+export const useSetLang = () => {
+  const { setLang } = useContext(LangContext);
+  return setLang;
 };
 
-export const useUserLoggedOut = () => {
-  const { userLoggedOut } = useContext(UserContext);
-  return userLoggedOut;
+export const useTranslate = () => {
+  const { translate } = useContext(LangContext);
+  return translate;
 };
 
-export default UserContextProvider;
+export default ContextProvider;

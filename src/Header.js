@@ -1,15 +1,18 @@
 import React from "react";
-import { useUser } from "./context";
+import { useLang, useSetLang, useTranslate } from "./context";
 
 const Header = () => {
-  const { name, loggedIn } = useUser();
-  console.log(name, loggedIn);
+  const setLang = useSetLang();
+  const translate = useTranslate();
+  const lang = useLang();
   return (
-    <>
-      <header>
-        Hello! {name}, You are {loggedIn ? "logged in" : "logged out"}
-      </header>
-    </>
+    <header>
+      <h1>{lang}</h1>
+      <h5>{translate("hello")}</h5>
+      <button onClick={() => setLang((lang) => (lang === "kr" ? "en" : "kr"))}>
+        {translate("translate")}
+      </button>
+    </header>
   );
 };
 
