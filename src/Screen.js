@@ -1,8 +1,14 @@
 import React from "react";
 import Header from "./Header";
+import Counter from "./Counter";
 
 const Screen = () => {
-  return <Header />;
+  return (
+    <>
+      <Counter />
+      <Header />
+    </>
+  );
 };
 
 export default Screen;
