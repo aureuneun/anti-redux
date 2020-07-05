@@ -1,5 +1,5 @@
 import React from "react";
-import { useLang, useSetLang, useTranslate } from "./context";
+import { useLang, useSetLang, useTranslate } from "../context";
 
 const Header = () => {
   const setLang = useSetLang();
